@@ -1,10 +1,9 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { WatchBridgePluginPlugin } from './definitions';
+import type { WatchBridgePlugin } from './definitions';
 
-const WatchBridgePlugin = registerPlugin<WatchBridgePluginPlugin>('WatchBridgePlugin', {
-  web: () => import('./web').then((m) => new m.WatchBridgePluginWeb()),
+export const WatchBridge = registerPlugin<WatchBridgePlugin>('WatchBridge', {
+  web: () => import('./web').then((m) => new m.WatchBridgeWeb()),
 });
 
 export * from './definitions';
-export { WatchBridgePlugin };

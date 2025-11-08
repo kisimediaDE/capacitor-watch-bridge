@@ -13,25 +13,69 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`syncJson(...)`](#syncjson)
+* [`isAvailable()`](#isavailable)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+Public API of the WatchBridge plugin.
+
+### syncJson(...)
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+syncJson(options: SyncJsonOptions) => Promise<void>
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
+Stores a JSON string in the configured App Group and tries
+to sync it to the watchOS app via WatchConnectivity.
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+If no watch is paired or available, the data is still written
+to the App Group and the Promise resolves without error.
+
+| Param         | Type                                                        |
+| ------------- | ----------------------------------------------------------- |
+| **`options`** | <code><a href="#syncjsonoptions">SyncJsonOptions</a></code> |
 
 --------------------
+
+
+### isAvailable()
+
+```typescript
+isAvailable() => Promise<IsAvailableResult>
+```
+
+Returns information about WatchConnectivity availability:
+- if it is supported
+- if a watch is paired
+- if the watchOS app is installed
+
+**Returns:** <code>Promise&lt;<a href="#isavailableresult">IsAvailableResult</a>&gt;</code>
+
+--------------------
+
+
+### Interfaces
+
+
+#### SyncJsonOptions
+
+| Prop       | Type                | Description                                                                              |
+| ---------- | ------------------- | ---------------------------------------------------------------------------------------- |
+| **`key`**  | <code>string</code> | Key under which the data is stored in the shared App Group. Example: "items" or "tasks". |
+| **`json`** | <code>string</code> | JSON string provided by the app. The plugin does not validate or parse this string.      |
+
+
+#### IsAvailableResult
+
+| Prop               | Type                 | Description                                                        |
+| ------------------ | -------------------- | ------------------------------------------------------------------ |
+| **`supported`**    | <code>boolean</code> | True if WatchConnectivity (WCSession) is supported on this device. |
+| **`paired`**       | <code>boolean</code> | True if an Apple Watch is paired with the iPhone.                  |
+| **`appInstalled`** | <code>boolean</code> | True if the watchOS companion app is installed.                    |
 
 </docgen-api>

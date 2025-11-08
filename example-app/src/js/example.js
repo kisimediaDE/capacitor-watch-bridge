@@ -1,6 +1,15 @@
-import { WatchBridgePlugin } from 'capacitor-watch-bridge';
+import { WatchBridge } from 'capacitor-watch-bridge';
 
-window.testEcho = () => {
-    const inputValue = document.getElementById("echoInput").value;
-    WatchBridgePlugin.echo({ value: inputValue })
-}
+window.testEcho = async () => {
+  const inputValue = document.getElementById("echoInput").value;
+
+  // Beispiel: syncJson mit einem kleinen JSON-Objekt
+  await WatchBridge.syncJson({
+    key: 'debugText',
+    json: JSON.stringify({ text: inputValue }),
+  });
+
+  // Optional: Verfügbarkeit loggen
+  const info = await WatchBridge.isAvailable();
+  console.log('Watch availability:', info);
+};
