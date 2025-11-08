@@ -62,11 +62,14 @@ enum WatchBridgeError: Error {
         // 3. Best-effort WatchConnectivity
         guard WCSession.isSupported() else { return }
 
-        guard let activeSession = ensureSession(),
-            activeSession.activationState == .activated,
-            activeSession.isPaired,
-            activeSession.isWatchAppInstalled
-        else {
+        guard let activeSession = ensureSession() else {
+            return
+        }
+
+        guard activeSession.isPaired, activeSession.isWatchAppInstalled else {
+            NSLog(
+                "WatchBridge: session isPaired=\(activeSession.isPaired), appInstalled=\(activeSession.isWatchAppInstalled)"
+            )
             return
         }
 
@@ -75,6 +78,7 @@ enum WatchBridgeError: Error {
                 "key": key,
                 "json": json,
             ])
+            NSLog("WatchBridge: sent application context for key=\(key)")
         } catch {
             NSLog("WatchBridge: Failed to update application context: \(error)")
         }

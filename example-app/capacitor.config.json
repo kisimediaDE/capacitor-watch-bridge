@@ -5,6 +5,9 @@
   "plugins": {
     "SplashScreen": {
       "launchAutoHide": false
+    },
+    "WatchBridge": {
+      "appGroupId": "group.de.kisimedia.watchbridge"
     }
   }
 }
