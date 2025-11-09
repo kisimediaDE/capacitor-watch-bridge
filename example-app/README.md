@@ -15,15 +15,15 @@ to a native **watchOS** app via **WatchConnectivity** and a shared **App Group**
     ```bash
     npm install
     npx cap sync ios
-    ````
+    ```
 
 2. Open the example app in Xcode:
 
     ```bash
     npx cap open ios
-    ````
+    ```
 
-3. Open the example app in Xcode:
+3. Make sure the App Group is enabled for both the iOS app and the WatchKit Extension:
 
     > 💡 The included WatchKit Extension and iOS App already share the same App Group ID: ***group.de.kisimedia.watchbridge***
 

@@ -24,7 +24,7 @@
 ✅ Sync arbitrary JSON data from iOS → watchOS via `updateApplicationContext()`  
 ✅ Store the same data in a shared **App Group** for offline access  
 ✅ Gracefully degrades if no Watch is paired or the app isn’t installed  
-✅ Fully written in Swift 5.9 with Swift Package Manager (no CocoaPods)  
+✅ Fully written in Swift 5.9 with Swift Package Manager support (CocoaPods spec included)  
 ✅ Drop-in Capacitor 7 plugin – zero additional configuration on web
 
 ---
@@ -74,7 +74,7 @@ console.log('Watch status:', info);
 On the watch, use the helper `WatchBridgeSession` to listen for new data
 and read from your App Group:
 
-```typescript
+```swift
 import WatchConnectivity
 
 final class MySession: NSObject, WCSessionDelegate {
@@ -172,7 +172,7 @@ Returns information about WatchConnectivity availability:
 
 ### 🧰 Requirements
 
-- iOS 17+ / watchOS 10+
+- iOS 14+ / watchOS 7+ (tested with iOS 18 / watchOS 11)
 - Capacitor 7.0+
 - Swift 5.9+
 - Xcode 15+
