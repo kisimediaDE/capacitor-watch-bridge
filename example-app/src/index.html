@@ -1,26 +1,146 @@
 <!doctype html>
-<html lang="en" dir="ltr" class="hydrated">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Example Capacitor App</title>
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#007aff" />
+    <title>WatchBridge Demo</title>
+    <style>
+      :root {
+        --bg: #f8f9fb;
+        --card-bg: #ffffff;
+        --primary: #007aff;
+        --text: #222;
+        --subtext: #666;
+        --radius: 16px;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      main {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 2rem;
+        width: min(90%, 420px);
+        text-align: center;
+        animation: fadeIn 0.4s ease;
+      }
+
+      h1 {
+        margin-top: 0;
+        color: var(--primary);
+        font-size: 1.6rem;
+        letter-spacing: -0.5px;
+      }
+
+      p.subtitle {
+        color: var(--subtext);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        outline: none;
+        transition: border 0.2s ease;
+      }
+
+      input:focus {
+        border-color: var(--primary);
+      }
+
+      button {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: transform 0.15s ease, background 0.3s ease;
+      }
+
+      button:hover {
+        background: #0061d9;
+      }
+
+      button:active {
+        transform: scale(0.97);
+      }
+
+      .status {
+        margin-top: 1.5rem;
+        text-align: left;
+        background: #f4f6fa;
+        border-radius: var(--radius);
+        padding: 1rem;
+        font-size: 0.9rem;
+        color: var(--subtext);
+        line-height: 1.4;
+      }
+
+      .status strong {
+        color: var(--text);
+      }
+
+      .footer {
+        margin-top: 1.5rem;
+        font-size: 0.75rem;
+        color: #999;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
+
   <body>
     <main>
-      <h1>Capacitor Test Plugin Project</h1>
-      <p>
-        This project can be used to test out the functionality of your plugin. Nothing in the
-        <em>example-app/</em> folder will be published to npm when using this template, so you can create away!
+      <h1>⌚️ WatchBridge</h1>
+      <p class="subtitle">Sync JSON data between your iPhone and Apple Watch.</p>
+
+      <input type="text" id="echoInput" placeholder="Enter some text…" value="Hello from Capacitor!" />
+      <button id="sendBtn">Send to Watch</button>
+
+      <div class="status" id="statusBox">
+        <strong>Status:</strong> waiting for connection…
+      </div>
+
+      <p class="footer">
+        Built with <a href="https://capacitorjs.com" target="_blank">Capacitor 7</a> ×
+        <a href="https://github.com/kisimediaDE/capacitor-watch-bridge" target="_blank">WatchBridge</a>
       </p>
-      <label for="echoInput">Echo Text:</label>
-      <input type="text" id="echoInput" name="echoInput" value="Hello World!" />
-      <button onclick="testEcho()">Click Me!</button>
     </main>
 
-    <script src="./js/example.js" type="module"></script>
+    <script type="module" src="./js/example.js"></script>
   </body>
 </html>
