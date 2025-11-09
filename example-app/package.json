@@ -13,13 +13,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@capacitor/core": "latest",
-    "capacitor-watch-bridge": "file:..",
-    "@capacitor/ios": "7.0.0"
+    "@capacitor/core": "7.4.4",
+    "@capacitor/ios": "7.4.4",
+    "capacitor-watch-bridge": "file:.."
   },
   "devDependencies": {
     "@capacitor/cli": "latest",
-    "vite": "^5.4.2"
+    "vite": "^7.2.2"
   },
   "author": "",
   "license": "ISC"
