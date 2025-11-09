@@ -78,11 +78,4 @@ public final class WatchBridgeSession: NSObject, ObservableObject, WCSessionDele
             self.latestJson = json
         }
     }
-
-    // These two are mandatory for iOS↔Watch handover,
-    // but no-ops for our use case.
-    public func sessionDidBecomeInactive(_ session: WCSession) {}
-    public func sessionDidDeactivate(_ session: WCSession) {
-        WCSession.default.activate()
-    }
 }
