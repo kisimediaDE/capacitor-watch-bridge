@@ -1,7 +1,7 @@
 import Capacitor
 import Foundation
 
-/// WatchBridge iOS Plugin – dünner Wrapper um den WatchBridge-Helper.
+/// WatchBridge iOS Plugin – thin wrapper around the WatchBridge helper.
 ///
 /// JS: registerPlugin<WatchBridgePlugin>('WatchBridge', ...)
 @objc(WatchBridgePlugin)
@@ -14,14 +14,28 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "isAvailable", returnType: CAPPluginReturnPromise),
     ]
 
-    /// App Group ID aus capacitor.config:
+    /// App Group ID from capacitor.config:
     /// plugins: { WatchBridge: { appGroupId: "group.com.example.myapp" } }
     private var appGroupId: String? {
-        guard let value = getConfigValue("appGroupId") as? String else {
-            return nil
+        // 1. Priority: capacitor.config (backwards compatible)
+        if let value = getConfigValue("appGroupId") as? String {
+            let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !trimmed.isEmpty {
+                return trimmed
+            }
         }
-        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
+
+        // 2. Fallback: Info.plist / WatchBridgeAppGroupId
+        if let plistValue = Bundle.main.object(forInfoDictionaryKey: "WatchBridgeAppGroupId")
+            as? String
+        {
+            let trimmed = plistValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !trimmed.isEmpty {
+                return trimmed
+            }
+        }
+
+        return nil
     }
 
     // MARK: - JS API
@@ -43,7 +57,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             call.resolve()
         } catch WatchBridgeError.appGroupIdMissing {
             call.reject(
-                "App Group ID not configured. Please set 'plugins.WatchBridge.appGroupId' in capacitor.config."
+                "App Group ID not configured. Please set 'plugins.WatchBridge.appGroupId' in capacitor.config or 'WatchBridgeAppGroupId' in Info.plist."
             )
         } catch WatchBridgeError.appGroupUserDefaultsUnavailable(let groupId) {
             call.reject("Unable to open UserDefaults for app group '\(groupId)'.")

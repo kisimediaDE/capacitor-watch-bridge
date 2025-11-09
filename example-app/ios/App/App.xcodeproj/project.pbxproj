@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -59,8 +59,18 @@
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF49DE412EC12855004F7ED0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"App-WatchKit-Extension-Watch-App-Info.plist",
+			);
+			target = AF4272A92EC00E0C009F4D71 /* App WatchKit Extension Watch App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AF4272AB2EC00E0C009F4D71 /* App WatchKit Extension Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "App WatchKit Extension Watch App"; sourceTree = "<group>"; };
+		AF4272AB2EC00E0C009F4D71 /* App WatchKit Extension Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AF49DE412EC12855004F7ED0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "App WatchKit Extension Watch App"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -502,6 +512,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App-WatchKit-Extension-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "App WatchKit Extension";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = de.kisimedia.CapacitorWidgetBridge;
@@ -548,6 +559,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App-WatchKit-Extension-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "App WatchKit Extension";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = de.kisimedia.CapacitorWidgetBridge;

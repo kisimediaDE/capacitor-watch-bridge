@@ -1,15 +1,9 @@
-//
-//  App_WatchKit_ExtensionApp.swift
-//  App WatchKit Extension Watch App
-//
-//  Created by Simon Kirchner on 09.11.25.
-//
-
+// App_WatchKit_ExtensionApp.swift
 import SwiftUI
+import WatchBridgeKit  // ✅ use the shared helper
 
 @main
 struct App_WatchKit_Extension_Watch_AppApp: App {
-    
     @StateObject private var session = WatchBridgeSession.shared
 
     var body: some Scene {
@@ -17,13 +11,10 @@ struct App_WatchKit_Extension_Watch_AppApp: App {
             VStack(spacing: 8) {
                 Text("WatchBridge Debug")
                     .font(.headline)
-
                 Text("Key: \(session.latestKey)")
                     .font(.footnote)
-
                 Text("JSON:")
                     .font(.caption2)
-
                 ScrollView {
                     Text(session.latestJson)
                         .font(.caption2)

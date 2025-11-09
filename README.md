@@ -104,9 +104,9 @@ with a modern, app-like HTML UI for testing iPhone ↔ Watch communication.
 
 <docgen-index>
 
-- [`syncJson(...)`](#syncjson)
-- [`isAvailable()`](#isavailable)
-- [Interfaces](#interfaces)
+* [`syncJson(...)`](#syncjson)
+* [`isAvailable()`](#isavailable)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
@@ -131,7 +131,8 @@ to the App Group and the Promise resolves without error.
 | ------------- | ----------------------------------------------------------- |
 | **`options`** | <code><a href="#syncjsonoptions">SyncJsonOptions</a></code> |
 
----
+--------------------
+
 
 ### isAvailable()
 
@@ -140,16 +141,17 @@ isAvailable() => Promise<IsAvailableResult>
 ```
 
 Returns information about WatchConnectivity availability:
-
 - if it is supported
 - if a watch is paired
 - if the watchOS app is installed
 
 **Returns:** <code>Promise&lt;<a href="#isavailableresult">IsAvailableResult</a>&gt;</code>
 
----
+--------------------
+
 
 ### Interfaces
+
 
 #### SyncJsonOptions
 
@@ -157,6 +159,7 @@ Returns information about WatchConnectivity availability:
 | ---------- | ------------------- | ---------------------------------------------------------------------------------------- |
 | **`key`**  | <code>string</code> | Key under which the data is stored in the shared App Group. Example: "items" or "tasks". |
 | **`json`** | <code>string</code> | JSON string provided by the app. The plugin does not validate or parse this string.      |
+
 
 #### IsAvailableResult
 

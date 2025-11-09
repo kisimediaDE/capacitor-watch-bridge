@@ -1,0 +1,4 @@
+module Cordova [system] {
+  header "CordovaStub.h"
+  export *
+}

@@ -1,3 +1,4 @@
+// ios/Sources/WatchBridgePlugin/WatchBridge.swift
 import Foundation
 import WatchConnectivity
 
@@ -8,7 +9,7 @@ enum WatchBridgeError: Error {
 
 @objc public class WatchBridge: NSObject {
 
-    /// Singleton-Instanz, damit es nur einen WCSession-Delegate gibt.
+    /// Singleton instance to ensure there is only one WCSession delegate.
     public static let shared = WatchBridge()
 
     private override init() {
@@ -20,6 +21,7 @@ enum WatchBridgeError: Error {
 
     // MARK: - WCSession Setup
 
+    /// Lazily sets up the WCSession if supported on this device.
     private func setupSessionIfNeeded() {
         guard WCSession.isSupported() else {
             session = nil
@@ -32,6 +34,7 @@ enum WatchBridgeError: Error {
         session = wcSession
     }
 
+    /// Returns the current WCSession, activating it if necessary.
     private func ensureSession() -> WCSession? {
         if let s = session {
             return s
@@ -42,16 +45,21 @@ enum WatchBridgeError: Error {
 
     // MARK: - Public API
 
-    /// Schreibt JSON in die App Group und versucht, es per WatchConnectivity zu schicken.
+    /// Writes JSON into the shared App Group and tries to send it via WatchConnectivity.
+    ///
+    /// - Parameters:
+    ///   - appGroupId: The App Group identifier (e.g. "group.com.example.myapp").
+    ///   - key: The key under which the JSON string will be stored.
+    ///   - json: The JSON string to store and sync.
     @objc public func syncJson(appGroupId: String?, key: String, json: String) throws {
-        // 1. App Group validieren
+        // 1. Validate App Group ID
         guard let rawGroupId = appGroupId?.trimmingCharacters(in: .whitespacesAndNewlines),
             !rawGroupId.isEmpty
         else {
             throw WatchBridgeError.appGroupIdMissing
         }
 
-        // 2. UserDefaults im App Group Container
+        // 2. Access UserDefaults in the App Group container
         guard let defaults = UserDefaults(suiteName: rawGroupId) else {
             throw WatchBridgeError.appGroupUserDefaultsUnavailable(rawGroupId)
         }
@@ -59,7 +67,7 @@ enum WatchBridgeError: Error {
         defaults.set(json, forKey: key)
         defaults.synchronize()
 
-        // 3. Best-effort WatchConnectivity
+        // 3. Best-effort WatchConnectivity sync
         guard WCSession.isSupported() else { return }
 
         guard let activeSession = ensureSession() else {
@@ -84,7 +92,8 @@ enum WatchBridgeError: Error {
         }
     }
 
-    /// Liefert Availability-Infos als Dictionary für `call.resolve(...)`.
+    /// Returns WatchConnectivity availability information as a dictionary
+    /// suitable for `call.resolve(...)` on the Capacitor side.
     @objc public func availability() -> [String: NSNumber] {
         guard WCSession.isSupported() else {
             return [
@@ -122,11 +131,11 @@ extension WatchBridge: WCSessionDelegate {
     }
 
     public func sessionDidBecomeInactive(_ session: WCSession) {
-        // required by protocol, no-op
+        // Required by protocol, no-op for this implementation.
     }
 
     public func sessionDidDeactivate(_ session: WCSession) {
-        // auf einem neuen Session-Objekt wieder aktivieren
+        // Re-activate the default session on the new session object.
         WCSession.default.activate()
     }
 
@@ -134,6 +143,6 @@ extension WatchBridge: WCSessionDelegate {
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String: Any]
     ) {
-        // v1: iPhone → Watch only, eingehender Context wird ignoriert.
+        // v1: iPhone → Watch only. Incoming context on iOS is ignored.
     }
 }
