@@ -1,6 +1,6 @@
 {
   "name": "capacitor-watch-bridge",
-  "version": "0.0.1",
+  "version": "7.0.0",
   "description": "A generic JSON sync bridge between a Capacitor iOS app and a native watchOS app using WatchConnectivity and App Groups.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
