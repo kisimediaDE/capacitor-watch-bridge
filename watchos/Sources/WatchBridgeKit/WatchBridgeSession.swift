@@ -113,5 +113,9 @@ public final class WatchBridgeSession: NSObject, ObservableObject, WCSessionDele
         applyContext(applicationContext)
     }
 
-    // Important: On watchOS, sessionDidBecomeInactive and sessionDidDeactivate are unavailable and should not be implemented.
+    @available(watchOS, unavailable)
+    public func sessionDidBecomeInactive(_ session: WCSession) {}
+
+    @available(watchOS, unavailable)
+    public func sessionDidDeactivate(_ session: WCSession) {}
 }
